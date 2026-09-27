@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Screen Time Swap: screen-free alternatives for the English classroom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --chalkboard: #2B3A30;
+    --chalkboard-2: #24322A;
+    --chalk: #F1EEE4;
+    --paper: #EDE5D0;
+    --paper-2: #E4DAC0;
+    --card: #F7F2E4;
+    --ink: #262B22;
+    --ink-soft: #4A5142;
+    --rule: #C9BC9B;
+    --red: #A63A2E;
+    --gold: #B9822C;
+    --blue: #4E6E7E;
+    --green: #5C7A52;
+    --shadow: rgba(38, 43, 34, 0.18);
+  }
+
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --paper: #26241C;
+      --paper-2: #2E2B21;
+      --card: #322F24;
+      --ink: #EDE6D3;
+      --ink-soft: #C7BFA6;
+      --rule: #4A4636;
+      --chalkboard: #171F1A;
+      --chalkboard-2: #10160F;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #26241C;
+    --paper-2: #2E2B21;
+    --card: #322F24;
+    --ink: #EDE6D3;
+    --ink-soft: #C7BFA6;
+    --rule: #4A4636;
+    --chalkboard: #171F1A;
+    --chalkboard-2: #10160F;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  h1, h2, h3, .display {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(255,255,255,0.03), transparent 40%),
+      radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.025), transparent 45%),
+      var(--chalkboard);
+    background-color: var(--chalkboard);
+    color: var(--chalk);
+    padding: 64px 0 56px;
+    border-bottom: 10px solid var(--chalkboard-2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(241,238,228,0.05) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .hero .wrap { position: relative; }
+
+  .eyebrow-note {
+    font-family: "Special Elite", monospace;
+    font-size: 13.5px;
+    color: #C9C3AE;
+    margin: 0 0 18px;
+    max-width: 30ch;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.1rem);
+    margin: 0 0 20px;
+    line-height: 1.05;
+  }
+
+  .hero h1 .underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero h1 .underline svg {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 14px;
+  }
+
+  .hero p.lede {
+    font-family: "Source Serif 4", serif;
+    font-size: 1.18rem;
+    color: #E4E1D3;
+    max-width: 52ch;
+    margin: 0 0 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: "Special Elite", monospace;
+    font-size: 14px;
+    border: 1.5px solid var(--chalk);
+    background: transparent;
+    color: var(--chalk);
+    padding: 12px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn:hover { background: rgba(241,238,228,0.1); }
+
+  .btn.solid {
+    background: var(--chalk);
+    color: var(--chalkboard-2);
+  }
+
+  .btn.solid:hover { background: #dcd8c8; }
+
+  /* ---------- WHY NOTE (personal) ---------- */
+
+  .why-note {
+    background: var(--card);
+    padding: 40px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .why-note .tag-line {
+    font-family: "Special Elite", monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+
+  .why-note h2 {
+    font-size: 1.4rem;
+    margin: 0 0 16px;
+  }
+
+  .why-note p {
+    margin: 0 0 14px;
+    color: var(--ink-soft);
+    max-width: 68ch;
+  }
+
+  .why-note p:last-child { margin-bottom: 0; }
+
+  .why-note em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .why-note a {
+    color: var(--red);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 2px;
+  }
+
+  .why-note a:hover {
+    text-decoration-color: var(--red);
+  }
+
+  /* ---------- WHY SECTION ---------- */
+
+  .why {
+    padding: 56px 0 40px;
+  }
+
+  .why .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 44px;
+    align-items: start;
+  }
+
+  .why h2 {
+    font-size: 1.5rem;
+    margin: 0 0 6px;
+  }
+
+  .why .tag-line {
+    font-family: "Special Elite", monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+
+  .why p { margin: 0 0 14px; color: var(--ink-soft); max-width: 62ch; }
+  .why p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 760px) {
+    .why .grid2 { grid-template-columns: 1fr; gap: 18px; }
+  }
+
+  /* ---------- SWAP LIST ---------- */
+
+  .swaps { padding: 24px 0 60px; }
+
+  .swaps-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+  }
+
+  .swaps-head h2 { font-size: 1.5rem; margin: 0 0 4px; }
+  .swaps-head .count { font-family: "Special Elite", monospace; font-size: 13px; color: var(--ink-soft); }
+
+  .controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+  }
+
+  .chip {
+    font-family: "Source Serif 4", serif;
+    font-size: 14px;
+    border: 1.5px solid var(--rule);
+    background: var(--card);
+    color: var(--ink);
+    padding: 7px 15px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .chip[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .chip .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 7px;
+  }
+
+  .shuffle-btn {
+    margin-left: auto;
+    font-family: "Special Elite", monospace;
+    font-size: 12.5px;
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 7px 4px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 18px 18px 20px;
+    box-shadow: 2px 3px 0 var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Special Elite", monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+
+  .card .meta .cat {
+    display: flex;
+    align-items: center;
+  }
+
+  .card .meta .cat .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .card .swap-out {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-decoration: line-through;
+    text-decoration-color: var(--rule);
+  }
+
+  .card .swap-in {
+    font-family: "Special Elite", monospace;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .card .how {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .card[hidden] { display: none; }
+
+  /* ---------- STRUCTURE ---------- */
+
+  .structure {
+    background: var(--paper-2);
+    padding: 56px 0 64px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .structure h2 { font-size: 1.5rem; margin: 0 0 8px; }
+  .structure .tag-line {
+    font-family: "Special Elite", monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 0 0 30px;
+    max-width: 60ch;
+  }
+
+  .steps {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .step .num {
+    font-family: "Special Elite", monospace;
+    font-size: 1.3rem;
+    color: var(--gold);
+  }
+
+  .step h3 {
+    font-size: 1.02rem;
+    margin: 0 0 4px;
+    font-family: "Source Serif 4", serif;
+    font-weight: 600;
+  }
+
+  .step p { margin: 0; color: var(--ink-soft); font-size: 15px; max-width: 62ch; }
+
+  @media (max-width: 620px) {
+    .step { grid-template-columns: 36px 1fr; }
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    padding: 34px 0 48px;
+    padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+  }
+
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  footer p {
+    font-family: "Special Elite", monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  :focus-visible {
+    outline: 2.5px solid var(--red);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow-note">A resource for English teachers</p>
+    <h1>
+      Screen Time<br>
+      <span class="underline">Swap
+        <svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M2,9 C40,2 80,12 100,6 C130,-2 160,10 198,4" fill="none" stroke="#C9822E" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </h1>
+    <p class="lede">Seventy screen-free activities that do the same job as a screen, sometimes a better one, plus a short framework for building them into a lesson without losing the learning.</p>
+    <div class="hero-actions">
+      <a href="#why-note" class="btn">Why</a>
+      <a href="#swaps" class="btn solid">See the 70 swaps</a>
+      <a href="#structure" class="btn">How to structure it</a>
+    </div>
+  </div>
+</header>
+
+<section class="why-note" id="why-note">
+  <div class="wrap">
+    <p class="tag-line">a note from the teacher behind this list</p>
+    <h2>Why I put this together</h2>
+    <p>I started paying closer attention to how much continuous screen time my students were logging in a single day. On some days it worked out to seven hours in a row in front of a screen at school, and probably more once they were home. That number is what got me looking harder at the research, including <em><a href="https://www.amazon.com/dp/B0GPR5NXSM" target="_blank" rel="noopener">The Digital Delusion</a></em> by Horvath, <em><a href="https://www.amazon.com/dp/0593655036" target="_blank" rel="noopener">The Anxious Generation</a></em> by Haidt, and <em><a href="https://www.amazon.com/dp/0310345693" target="_blank" rel="noopener">The Opt-Out Family</a></em> by Loechner, and at what I was doing in my own lessons.</p>
+    <p>I am now much more careful about when I ask students to use a phone or laptop, and when the more useful move is to put the device away. What surprised me is how readily students respond to that. Given a hands-on, screen-free task, they tend to lean into it rather than resist it. This list is the collection of what has worked for me, shared in case it is useful for your own lessons too.</p>
+  </div>
+</section>
+
+<section class="why">  <div class="wrap">
+    <div class="grid2">
+      <div>
+        <h2>Why swap at all</h2>
+        <p class="tag-line">the case for putting the screen down</p>
+      </div>
+      <div>
+        <p>Screens are efficient. They are also easy to overuse for tasks that do not need them: a quick reflection, a group discussion, a first draft. When every task defaults to a device, students lose practice with skills a screen quietly does for them, reading a room, holding a thought long enough to write it down, arguing a point out loud.</p>
+        <p>None of the activities here are anti-technology. They are simply the version of a task that does not need a screen to work, chosen because paper, movement, and conversation are sometimes the better tool for the job, not the fallback for when the tool is unavailable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="swaps" id="swaps">
+  <div class="wrap">
+    <div class="swaps-head">
+      <div>
+        <h2>70 swaps for the classroom</h2>
+      </div>
+      <p class="count"><span id="visible-count">40</span> of <span id="total-count">40</span> shown</p>
+    </div>
+
+    <div class="controls" role="group" aria-label="Filter swaps by category">
+      <button class="chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="movement" aria-pressed="false"><span class="dot" style="background:#4E6E7E"></span>Movement</button>
+      <button class="chip" data-filter="creative" aria-pressed="false"><span class="dot" style="background:#B9822C"></span>Creative</button>
+      <button class="chip" data-filter="discussion" aria-pressed="false"><span class="dot" style="background:#A63A2E"></span>Discussion</button>
+      <button class="chip" data-filter="reflective" aria-pressed="false"><span class="dot" style="background:#5C7A52"></span>Reflective</button>
+      <button class="shuffle-btn" id="shuffle">Shuffle the order</button>
+    </div>
+
+    <div class="card-grid" id="card-grid"></div>
+  </div>
+</section>
+
+<section class="structure" id="structure">
+  <div class="wrap">
+    <h2>Structuring screen-free time so it still teaches</h2>
+    <p class="tag-line">a swap only works if it is planned like a lesson, not dropped in like a reward</p>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Screen Time Swap</p>
+    <p>Nannestad High School - Barbara Anna Zielonka</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var CATS = {
+    movement: { label: "Movement", color: "#4E6E7E" },
+    creative: { label: "Creative", color: "#B9822C" },
+    discussion: { label: "Discussion", color: "#A63A2E" },
+    reflective: { label: "Reflective", color: "#5C7A52" }
+  };
+
+  var SWAPS = [
+    { cat: "movement", time: "15-20 min", out: "Scrolling during a spare five minutes", inn: "Five-senses walk with an observation log", how: "Students walk the corridor or schoolyard and log what they notice using five senses, then translate two entries into descriptive vocabulary." },
+    { cat: "movement", time: "15 min", out: "Looking words up in a translation app", inn: "Vocabulary scavenger hunt", how: "Hide word cards around the room or school. Students find a card, define it, and use it in a sentence before moving to the next." },
+    { cat: "discussion", time: "20-25 min", out: "Arguing a point in a comment section", inn: "Silent gallery walk debate", how: "Post statements on paper around the room. Students write silent responses underneath, then walk the gallery reading how the debate built up." },
+    { cat: "movement", time: "20 min", out: "Watching an interview clip", inn: "Character interview walk", how: "One student stays in role as a character or author while classmates rotate through as interviewers, asking a prepared question each." },
+    { cat: "movement", time: "10-15 min", out: "App-based icebreaker games", inn: "Human bingo with target language", how: "Students fill a bingo grid by finding classmates who match a grammar structure or vocabulary item, then report a sentence back to the class." },
+    { cat: "reflective", time: "10 min", out: "Posting a reflection online", inn: "Reflective journaling on paper", how: "A short, unguided writing prompt tied to the lesson. No sharing required unless a student chooses to." },
+    { cat: "creative", time: "25-30 min", out: "Watching the film adaptation", inn: "Comic strip retelling of a scene", how: "Students storyboard a key scene from the text in four to six panels, focusing on what a director would choose to show." },
+    { cat: "creative", time: "20 min", out: "Browsing lyric videos for inspiration", inn: "Found poetry from print clippings", how: "Students cut and rearrange words from newspapers or magazines into a short poem, then read it aloud to a partner." },
+    { cat: "creative", time: "30-40 min", out: "Watching a dramatized version of a scene", inn: "Short skit performance", how: "Small groups script and perform a two-minute scene based on a text, staying true to a character's voice." },
+    { cat: "creative", time: "15 min", out: "Vocabulary app games", inn: "Vocabulary charades or Pictionary", how: "Students act out or sketch target words for their team to guess against the clock." },
+    { cat: "discussion", time: "25-30 min", out: "Arguing in a group chat", inn: "Structured peer debate", how: "Pairs prepare arguments on cue cards for a motion tied to the text, then debate in front of the class with a timed rebuttal round." },
+    { cat: "discussion", time: "25 min", out: "Watching a panel discussion video", inn: "Fishbowl discussion", how: "An inner circle discusses the text while an outer circle listens and notes points to raise, then the circles swap." },
+    { cat: "discussion", time: "30 min", out: "Reading a plot summary online", inn: "Literature circles with role cards", how: "Each student takes a role, questioner, summarizer, word finder, connector, and leads that part of a small group discussion." },
+    { cat: "discussion", time: "10 min", out: "Answering a prompt in a chat app", inn: "Think-pair-share on index cards", how: "Students write their first thought on a card, compare with a partner, then combine into one card to share with the class." },
+    { cat: "discussion", time: "15-20 min", out: "Messaging classmates about the topic", inn: "Timed rotating peer interviews", how: "Students pair up for ninety seconds to answer a question about the text, then rotate to a new partner and a new question." },
+    { cat: "reflective", time: "15-20 min", out: "Listening to an audiobook while multitasking on a phone", inn: "Silent reading with sticky-note annotations", how: "Students read in silence and mark reactions with sticky notes instead of highlighting on a screen, then discuss one note with a neighbor." },
+    { cat: "reflective", time: "15 min", out: "Digital mind-mapping tools", inn: "Hand-drawn mind mapping", how: "Students map a concept or character on large paper, using space and connecting lines to show relationships between ideas." },
+    { cat: "reflective", time: "15-20 min", out: "Texting a friend about the lesson", inn: "Letter writing", how: "Students write a letter to a character, an author, or their future self, responding to a question raised by the text." },
+    { cat: "reflective", time: "5-10 min", out: "Checking notifications at the end of class", inn: "Three-good-things journal", how: "Students note three things that went well in the lesson or the day, building a habit of noticing rather than scrolling past." },
+    { cat: "reflective", time: "20-25 min", out: "Solving an online crossword", inn: "Student-made word puzzle", how: "Students build a crossword or word search using the week's vocabulary, then trade with a partner to solve." },
+    { cat: "movement", time: "15 min", out: "Running text through a grammar checker", inn: "Grammar scavenger hunt", how: "Post short printed passages around the room, some correct and some with planted errors. Students circulate and mark the errors they find." },
+    { cat: "movement", time: "15-20 min", out: "Building a story together on a shared document", inn: "Story chain relay", how: "Teams line up. One student runs to a shared sheet, adds a sentence to a story in progress, then runs back so the next teammate can go." },
+    { cat: "movement", time: "10-15 min", out: "Building a deck in a flashcard app", inn: "Word wall building", how: "Students write new vocabulary on cards and place them on a wall under the correct theme or word class, moving up to add and rearrange as the lesson goes." },
+    { cat: "movement", time: "10 min", out: "Answering an online poll", inn: "Silent line-up", how: "Students arrange themselves along an imaginary line across the room to show how strongly they agree with a statement, without talking, then compare positions." },
+    { cat: "movement", time: "20-25 min", out: "Browsing a virtual museum tour", inn: "Museum walk", how: "Post printed excerpts, images, or artifacts related to the text at stations around the room. Students circulate in pairs and annotate a response sheet at each stop." },
+    { cat: "creative", time: "20 min", out: "Watching a filmed version of a scene", inn: "Tableau or freeze-frame scenes", how: "Groups pose as a frozen image capturing a key moment from the text. Classmates guess the moment, then the group explains their choices." },
+    { cat: "creative", time: "20-25 min", out: "Reading fan-written alternate endings online", inn: "Alternate ending writing", how: "Students rewrite the final scene of a text from a chosen turning point, keeping the characters consistent with how they were written." },
+    { cat: "creative", time: "15-20 min", out: "Using a character trait generator", inn: "Character alphabet poster", how: "For an assigned character, students find one descriptive word per letter of the alphabet and build a poster, then defend three of their choices." },
+    { cat: "creative", time: "30 min", out: "Designing a digital newsletter", inn: "Newspaper front page", how: "Groups lay out a paper front page reporting a key event from the text, including a headline, a short article, and a drawn image." },
+    { cat: "creative", time: "20 min", out: "Watching an AI-generated story video", inn: "Prop storytelling", how: "Students draw three random objects from a bag and improvise a short story that uses all three, building on a classmate's line each round." },
+    { cat: "discussion", time: "15 min", out: "Voting in an online poll", inn: "Four corners", how: "Label the room's corners with positions on an issue from the text. Students move to the corner closest to their view and explain their reasoning to whoever joins them." },
+    { cat: "discussion", time: "20-25 min", out: "Watching a character Q&A video", inn: "Hot seat", how: "One student stays in role as a character and answers questions from the class, staying consistent with the character's motives and voice." },
+    { cat: "discussion", time: "15-20 min", out: "Posting a reaction on social media", inn: "Barometer debate", how: "Mark a line across the room from 'strongly agree' to 'strongly disagree.' Students stand where their view sits and a few explain their position before the statement changes." },
+    { cat: "discussion", time: "30 min", out: "Reading a summarized version of a text online", inn: "Jigsaw reading groups", how: "Each group reads and becomes expert on one section of a text, then reshuffles into mixed groups where every member teaches their section to the others." },
+    { cat: "discussion", time: "25 min", out: "Watching a news recap video", inn: "Class news bulletin", how: "Small groups prepare and deliver a short, headline-style news report summarizing a chapter or event from the text to the rest of the class." },
+    { cat: "reflective", time: "5 min", out: "Posting a one-word status update", inn: "One-word summary cards", how: "Students write the one word that best sums up the lesson on a card and hold it up or hand it in, then a few explain their choice." },
+    { cat: "reflective", time: "5-10 min", out: "Submitting an exit ticket through an app", inn: "Paper exit tickets", how: "A quick written response to a single question, handed in on the way out, gives a fast read on what landed and what did not." },
+    { cat: "reflective", time: "15 min", out: "Building a deck in a flashcard app", inn: "Hand-made vocabulary flashcards", how: "Students write a word on one side of a card and a definition or sketch on the other, then quiz themselves or a partner." },
+    { cat: "reflective", time: "15-20 min", out: "Screenshotting the lesson slides", inn: "Silent sketchnoting", how: "Instead of copying slides, students summarize the lesson in their own drawings, arrows, and short notes on one page." },
+    { cat: "reflective", time: "10 min", out: "Logging books read in an app", inn: "Reading log update", how: "Students update a running paper log of what they have read, including a line on what they thought of it, building a record over the term." },
+    { cat: "movement", time: "10-15 min", out: "Sorting vocabulary in an app", inn: "Corner categorization sort", how: "Label bins or table corners with categories. Students physically sort a stack of word or grammar cards into the right bin against the clock." },
+    { cat: "movement", time: "15-20 min", out: "Using a text-to-speech dictation app", inn: "Walking dictation", how: "Post a short passage on a far wall. One partner reads and memorizes a line, runs back, and dictates it while the other writes, repeating until the passage is complete." },
+    { cat: "movement", time: "20 min", out: "Building a timeline in a digital tool", inn: "Class timeline build", how: "Tape a blank timeline across the floor. Students place event cards from the text in order, then walk the line explaining the sequence to a partner." },
+    { cat: "movement", time: "10-15 min", out: "Watching short definition videos", inn: "Silent statue transformation", how: "In pairs, students move through a short sequence of poses that act out a word's meaning without speaking, while classmates guess the word." },
+    { cat: "movement", time: "15 min", out: "Submitting questions through a Q&A app", inn: "Question relay circle", how: "Students sit in a circle and pass a question card. Each student answers it briefly, adds a follow-up question, and passes it on." },
+    { cat: "creative", time: "20 min", out: "Watching a scene with its sound effects", inn: "Soundscape creation", how: "Using only voices and classroom objects, small groups build the sound of a scene from the text while classmates close their eyes and guess what is happening." },
+    { cat: "creative", time: "15 min", out: "Sending an in-character message on an app", inn: "Character postcard", how: "Students write a postcard from one character to another, choosing details that only make sense once you know the story." },
+    { cat: "creative", time: "30 min", out: "Watching an animated retelling", inn: "Paper puppet retelling", how: "Groups make simple paper puppets for the main characters and retell a scene in their own words, focusing on voice and gesture rather than exact lines." },
+    { cat: "creative", time: "25 min", out: "Watching a captioned video clip", inn: "Silent film captioning", how: "Groups act out a scene with no dialogue while writing title cards on paper that a narrator holds up to explain the action, silent-film style." },
+    { cat: "creative", time: "15-20 min", out: "Using a character generator app", inn: "Character recipe card", how: "Students write a character as a recipe, listing the qualities, quantities, and one surprising ingredient needed to create them, then explain their choices." },
+    { cat: "discussion", time: "25 min", out: "Talking in video call breakout rooms", inn: "Concentric circles", how: "Students form two circles, inner facing outer. Each pair discusses a question for a set time, then the outer circle rotates to a new partner and a new question." },
+    { cat: "discussion", time: "20-25 min", out: "Reading opposing opinions online", inn: "Devil's advocate roundtable", how: "Students argue the position opposite to their own view on an issue from the text, then reflect afterward on what the exercise changed about their thinking." },
+    { cat: "discussion", time: "30 min", out: "Joining different online discussion threads", inn: "World café rotation", how: "Small groups discuss a different question at each table for a set time, then rotate. One student stays behind each round to brief the new group on what was said." },
+    { cat: "discussion", time: "15 min", out: "Texting during class", inn: "Silent paper conversation", how: "Pairs pass a notebook back and forth, holding an entire conversation about the text in writing without speaking." },
+    { cat: "discussion", time: "15-20 min", out: "Co-writing a story in a shared document", inn: "Storytelling circle", how: "Sitting in a circle, students build a story aloud one sentence at a time, with no planning beyond what the last person said." },
+    { cat: "reflective", time: "10 min", out: "Keeping a glossary in an app", inn: "Personal glossary building", how: "Students keep a running handwritten glossary of new words with a definition and an example sentence, added to after every lesson." },
+    { cat: "reflective", time: "10 min", out: "Filling out a digital exit survey", inn: "Learning journal with sentence starters", how: "Students complete prompts such as 'Today I learned' and 'I'm still unsure about' in a paper journal kept across the term." },
+    { cat: "reflective", time: "10 min", out: "Leaving comments in a shared document", inn: "Peer feedback slips", how: "After a presentation or piece of writing, classmates fill out a short paper slip with one strength and one suggestion, handed to the author directly." },
+    { cat: "reflective", time: "10-15 min", out: "Tracking goals in an app", inn: "Language learning goal card", how: "Students write one specific goal for the week on a card, kept somewhere visible, and revisit it briefly at the start of the next lesson." },
+    { cat: "reflective", time: "15-20 min", out: "Highlighting passages in an ebook", inn: "Quiet observation journal", how: "During silent reading, students jot brief reactions or questions in a notebook at natural stopping points instead of marking a digital text." },
+    { cat: "discussion", time: "20-25 min", out: "Using a transcription app", inn: "Dictogloss", how: "Read a short text aloud twice at normal speed. Students take individual notes, then work in small groups to reconstruct the text as accurately as they can from their combined notes." },
+    { cat: "discussion", time: "15-20 min", out: "Checking answers in a grammar app", inn: "Grammar auction", how: "Give teams a fixed budget of fake money and a set of sentences, some correct and some with planted errors. Teams bid on the sentences they believe are correct, then you reveal the answers and settle the accounts." },
+    { cat: "movement", time: "15 min", out: "Building sentences in a word-order app", inn: "Kinesthetic sentence building", how: "Hand each student a word card. The group has to physically arrange themselves in a line to form a grammatically correct sentence, then try a second sentence with the same words in a different order." },
+    { cat: "movement", time: "10 min", out: "Playing a vocabulary app against the clock", inn: "Board race", how: "Split the class into teams. One student from each team races to the board and writes a word in a given category, then tags a teammate to add the next, until time runs out." },
+    { cat: "creative", time: "20-25 min", out: "Listening to a recorded audiobook performance", inn: "Reader's theater", how: "Students read a script version of a scene aloud in character, focusing on pace, tone, and expression rather than staging or memorized lines." },
+    { cat: "creative", time: "15-20 min", out: "Browsing AI-generated poetry online", inn: "Spine poetry", how: "Using book spines from the classroom or school library, students arrange titles into a found poem, then photograph or copy down the stack before reshelving." },
+    { cat: "creative", time: "15 min", out: "Playing a vocabulary app game", inn: "Taboo-style word guessing", how: "One student describes a target word to their team without saying it or five other banned words on the card, while the team races to guess it before time runs out." },
+    { cat: "discussion", time: "20 min", out: "An unmoderated video call discussion", inn: "Talking chips discussion", how: "Give each student a set number of paper chips. Every time they speak in the discussion they hand one in, and once their chips are gone they cannot speak again until everyone has used theirs." },
+    { cat: "movement", time: "20 min", out: "Running an online poll or survey app", inn: "Class survey walk", how: "Students write a question tied to the topic, then circulate the room asking classmates and tallying answers on a paper sheet before reporting patterns back to the class." },
+    { cat: "discussion", time: "20-25 min", out: "Watching a book trailer video", inn: "One-minute book pitch", how: "Students pair up and take turns pitching a book they are reading or have read in sixty seconds, then rotate to a new partner and pitch again." }
+  ];
+
+  var grid = document.getElementById("card-grid");
+  var stepsWrap = document.getElementById("steps");
+  var visibleCountEl = document.getElementById("visible-count");
+  var totalCountEl = document.getElementById("total-count");
+  var currentFilter = "all";
+  totalCountEl.textContent = SWAPS.length;
+
+  function renderCards(list) {
+    grid.innerHTML = "";
+    list.forEach(function (s) {
+      var cat = CATS[s.cat];
+      var card = document.createElement("article");
+      card.className = "card";
+      card.dataset.cat = s.cat;
+      card.innerHTML =
+        '<div class="meta">' +
+          '<span class="cat"><span class="dot" style="background:' + cat.color + '"></span>' + cat.label + '</span>' +
+          '<span>' + s.time + '</span>' +
+        '</div>' +
+        '<p class="swap-out">' + s.out + '</p>' +
+        '<p class="swap-in">' + s.inn + '</p>' +
+        '<p class="how">' + s.how + '</p>';
+      grid.appendChild(card);
+    });
+    applyFilter();
+  }
+
+  function applyFilter() {
+    var cards = grid.querySelectorAll(".card");
+    var visible = 0;
+    cards.forEach(function (c) {
+      var match = currentFilter === "all" || c.dataset.cat === currentFilter;
+      c.hidden = !match;
+      if (match) visible++;
+    });
+    visibleCountEl.textContent = visible;
+  }
+
+  document.querySelectorAll(".chip[data-filter]").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      document.querySelectorAll(".chip[data-filter]").forEach(function (c) {
+        c.setAttribute("aria-pressed", "false");
+      });
+      chip.setAttribute("aria-pressed", "true");
+      currentFilter = chip.dataset.filter;
+      applyFilter();
+    });
+  });
+
+  document.getElementById("shuffle").addEventListener("click", function () {
+    for (var i = SWAPS.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = SWAPS[i]; SWAPS[i] = SWAPS[j]; SWAPS[j] = tmp;
+    }
+    renderCards(SWAPS);
+  });
+
+  var STEPS = [
+    { title: "Anchor it to a learning goal", body: "Decide what concept or skill the activity should reinforce before choosing the activity, not after." },
+    { title: "Time it deliberately", body: "Short blocks of ten to fifteen minutes work well for a reset between tasks. Blocks of twenty five to forty minutes suit activities meant to build a concept." },
+    { title: "Build in a visible product", body: "A log, a poster, a drawing, or a set of notes gives the activity a purpose beyond having done something different for a while." },
+    { title: "Debrief before moving on", body: "A short share-out that connects the activity back to the lesson keeps it from feeling like a detour from the material." },
+    { title: "Rotate the type across the week", body: "Alternating movement, creative, discussion, and reflective activities keeps screen-free time varied instead of repetitive." },
+    { title: "Set the expectation up front", body: "A short checklist or a quick example of a strong response keeps an open-ended task focused, especially for a class new to it." }
+  ];
+
+  STEPS.forEach(function (step, i) {
+    var el = document.createElement("div");
+    el.className = "step";
+    el.innerHTML =
+      '<div class="num">' + String(i + 1).padStart(2, "0") + '</div>' +
+      '<div><h3>' + step.title + '</h3><p>' + step.body + '</p></div>';
+    stepsWrap.appendChild(el);
+  });
+
+  renderCards(SWAPS);
+})();
+</script>
+
+</body>
+</html>
